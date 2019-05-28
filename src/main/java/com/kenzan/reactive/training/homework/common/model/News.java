@@ -1,6 +1,6 @@
-package com.kenzan.reactive.training.homework.session3.model;
+package com.kenzan.reactive.training.homework.common.model;
 
-import com.kenzan.reactive.training.homework.session3.types.NewsType;
+import com.kenzan.reactive.training.homework.common.types.NewsType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

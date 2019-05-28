@@ -1,0 +1,14 @@
+/target
+/build
+/bin
+/target
+/.settings
+/.project
+/.classpath
+# IntelliJ IDEA files
+.idea/**
+*.iml
+/target/
+/target/
+*.log
+*.DS_Store

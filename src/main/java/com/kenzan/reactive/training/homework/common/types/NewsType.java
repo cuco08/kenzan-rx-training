@@ -1,4 +1,4 @@
-package com.kenzan.reactive.training.homework.session3.types;
+package com.kenzan.reactive.training.homework.common.types;
 
 import lombok.Getter;
 

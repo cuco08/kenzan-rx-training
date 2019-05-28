@@ -1,11 +1,12 @@
-package com.kenzan.reactive.training.homework.session3.subscriber;
+package com.kenzan.reactive.training.homework.common.subscriber;
 
-import com.kenzan.reactive.training.homework.session3.model.News;
-import com.kenzan.reactive.training.homework.session3.types.NewsType;
+import com.kenzan.reactive.training.homework.common.model.News;
+import com.kenzan.reactive.training.homework.common.types.NewsType;
 import lombok.Getter;
 import rx.Subscriber;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -18,17 +19,17 @@ public class NewsSubscriber extends Subscriber<News> {
 
     private NewsSubscriber(String name, List<NewsType> allowedTypes) {
         this.name = name;
-        copyNewsType(allowedTypes, this.allowedTypes);
+        this.allowedTypes.addAll(allowedTypes);
     }
 
     private NewsSubscriber(String name, List<NewsType> allowedTypes, List<NewsType> rejectedTypes) {
         this.name = name;
-        copyNewsType(allowedTypes, this.allowedTypes);
-        copyNewsType(rejectedTypes, this.rejectedTypes);
+        this.allowedTypes.addAll(allowedTypes);
+        this.rejectedTypes.addAll(rejectedTypes);
     }
 
-    public static NewsSubscriber create(String name, List<NewsType> allowedTypes) {
-        return new NewsSubscriber(name, allowedTypes);
+    public static NewsSubscriber create(String name, NewsType ... allowedTypes) {
+        return new NewsSubscriber(name, Arrays.asList(allowedTypes));
     }
 
     public static NewsSubscriber create(String name, List<NewsType> allowedTypes, List<NewsType> rejectedTypes) {
@@ -48,16 +49,7 @@ public class NewsSubscriber extends Subscriber<News> {
             System.out.println(this.name + " is unsubscribing as he/she received news about [" + n.getType() + "]");
             this.unsubscribe();
         } else {
-            System.out.println("[" + n.getType() + "] " + n.getDescription());
-        }
-    }
-
-    private void copyNewsType(List<NewsType> source, List<NewsType> destination) {
-        if (source != null && !source.isEmpty()) {
-            if (destination == null) {
-                destination = new ArrayList<>();
-            }
-            destination.addAll(source);
+            System.out.println("[" + this.name + " : " + n.getType() + "] " + n.getDescription());
         }
     }
 }
