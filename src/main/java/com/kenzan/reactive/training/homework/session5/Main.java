@@ -14,7 +14,7 @@ public class Main {
                 System.out.print("$");
                 final String line = keyboard.nextLine();
 
-                if (line.equals("bye")) {
+                if (line.equalsIgnoreCase("bye")) {
                     s.unsubscribe();
                 } else if (!Operation.isValidOperation(line.toString())) {
                     System.out.println("Nothing to do. Try any of PRINT, SUM, SUBTRACT");
