@@ -1,6 +1,6 @@
 package com.kenzan.reactive.training.homework.session5;
 
-import com.kenzan.reactive.training.homework.session5.types.Operation;
+import com.kenzan.reactive.training.homework.session5.types.OperationType;
 import rx.Observable;
 import rx.observables.ConnectableObservable;
 
@@ -16,7 +16,7 @@ public class Main {
 
                 if (line.equalsIgnoreCase("bye")) {
                     s.unsubscribe();
-                } else if (!Operation.isValidOperation(line.toString())) {
+                } else if (!OperationType.isValidOperation(line.toString())) {
                     System.out.println("Nothing to do. Try any of PRINT, SUM, SUBTRACT");
                 } else {
                     s.onNext(line);
@@ -25,10 +25,10 @@ public class Main {
         }).publish();
         System.out.println("Say 'bye' to exit");
 
-        cli.filter(line -> Operation.isPrintOperation(line.toString())).subscribe(line ->
-                System.out.println(line.toString().substring(Operation.PRINT.name().length() + 1)));
+        cli.filter(line -> OperationType.isPrintOperation(line.toString())).subscribe(line ->
+                System.out.println(line.toString().substring(OperationType.PRINT.name().length() + 1)));
 
-        cli.filter(line -> Operation.isSumOperation(line.toString())).subscribe(line -> {
+        cli.filter(line -> OperationType.isSumOperation(line.toString())).subscribe(line -> {
             String[]parts = line.toString().split(" ");
 
             if (parts.length >= 3) {
@@ -36,7 +36,7 @@ public class Main {
             }
         }, e -> System.out.println("Invalid input " + e));
 
-        cli.filter(line -> Operation.isSubtractOperation(line.toString())).subscribe(line -> {
+        cli.filter(line -> OperationType.isSubtractOperation(line.toString())).subscribe(line -> {
             String[]parts = line.toString().split(" ");
 
             if (parts.length >= 3) {
